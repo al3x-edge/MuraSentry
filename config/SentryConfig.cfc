@@ -27,7 +27,7 @@ component accessors=true {
 
   public function init(string dsn)
   {
-    writeDump(this);
+    //writeDump(this);
     this.Sentry_DSN = arguments.dsn;
 
     var parsedDSN = parseUri(this.Sentry_DSN);
