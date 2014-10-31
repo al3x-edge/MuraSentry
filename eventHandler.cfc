@@ -32,4 +32,15 @@ component name='eventHandler' accessors='true' extends='mura.plugin.pluginGeneri
     // Track Exception w/ Raven to report to Sentry
     application.SentryRavenClient.captureException(arguments.$.event('exception'));
   }
+
+  public void function onSiteError() {
+    if(!structKeyExists(application, "Sentry")) {
+      var sentryConfig = new MuraSentry.config.SentryConfig(variables.pluginConfig.getSetting('SentryDSN'));
+
+      application.SentryRavenClient = new MuraSentry.Client.Raven(argumentCollection=sentryConfig.getRavenConfiguration());
+    }
+
+    // Track Exception w/ Raven to report to Sentry
+    application.SentryRavenClient.captureException(arguments.$.event('exception'));
+  }
 }
